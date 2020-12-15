@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        {% if todos %}
+        <h5>Congratulations!! You have completed {{ todos.count }} task{{ todos.count|pluralize }}.</h5>
+        {% else %}
+        <h5>No Completed Tasks YET!!!!</h5>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+        {% if todos %}
+            <div class="list-group">
+                {% for todo in todos %}
+                    <p class="list-group-item list-group-item-action {% if todo.important %} list-group-item-danger{% endif %}">
+                        {% if todo.important %}<b>{% endif %}{{ todo.title }}{% if todo.important %}</b>{% endif %}{% if todo.memo %}
+                        - {{ todo.memo|truncatechars:30 }}{% endif %}</p>
+
+                {% endfor %}
+            </div>
+        {% endif %}
+        </div>
+</div>
+
+{% endblock %}
